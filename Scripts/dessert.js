@@ -1,5 +1,5 @@
 function Cart(name, price, id, ){
-    this.item = name
+    this.name = name
     this.price = price
     this.id = id
     //this.img = img
@@ -48,9 +48,9 @@ let quantity = document.getElementById('qty');
 // Attach eventListner
 document.querySelectorAll('.btns').forEach((button) => {
     button.addEventListener('click', (event) => {
-        let index = event.target.getAttribute('data-index');
-        addToCart(allCarts[index])
-        console.log(allCarts)
+    let index = event.target.getAttribute('data-index');
+    addToCart(allCarts[index])
+    console.log(allCarts)
     });
 });
 
@@ -62,12 +62,13 @@ function addToCart(item){
     if (existingItem){
         existingItem.quantity ++; // Increase if item already exist
 
-    } else{cart.push({...item, quantity:1})}// Add new items to cart
-
+    } else{cart.push({...item, quantity:1})// Add new items to cart
+   
+    }
     // Save updated cart to localStorage
     localStorage.setItem('cart', JSON.stringify(cart))
 
-
+    updatedCart();
    // Attach Add to cart function to button
     // document.querySelectorAll('.btns').forEach((button, index)=>{
     //     button.addEventListener('click', () =>{
@@ -75,23 +76,23 @@ function addToCart(item){
     //     })
     // })
     
-
-    updatedCart()
 }
 
 // Remove from cart
-itemsList.addEventListener('click', (event) => {
+function removeBtn(){
+    itemsList.addEventListener('click', (event) => {
     if(event.target.classList.contains('remove-btn')){
         let index = event.target.getAttribute('item-index')
         cart.splice(index, 1)
 
         updatedCart()
     }
-})
+})}
+
 
 //Clear Cart
 clearButton.addEventListener('click', () => {
-    carts = []
+    cart = []
     localStorage.setItem('cart', JSON.stringify(cart))
     localStorage.setItem('totalPrice', '0.00')
     updatedCart()
@@ -103,30 +104,30 @@ clearButton.addEventListener('click', () => {
 function updatedCart(){
     itemsList.innerHTML = ''
     totalPrice = 0
+    totalCartCount.textContent = cart.length;
 
     cart.forEach((item, index)=>{
     let removeButton = document.createElement('button')
 
     let showItemsListed = document.createElement('li')         
-    showItemsListed.textContent = `${item.name}- $${item.price}` 
+    showItemsListed.textContent = `${item.name} - $${(item.price * item.quantity).toFixed(2)}` 
     removeButton.textContent = 'Remove'
     removeButton.classList.add('remove-btn')
     removeButton.setAttribute('cart-value', index)
     showItemsListed.appendChild(removeButton)
 
     itemsList.appendChild(showItemsListed)
-
+    console.log(showItemsListed)
     // Convert's price to a number and add to total
-    totalPrice += parseFloat(item.price)
+    totalPrice += item.price * item.quantity
 
     })
     
-    totalCartCount.textContent = cart.length
-    totalItemsPrice.textContent = totalPrice.toFixed(2)// Updates total price in 2 decimal places
-
+    //totalCartCount.textContent = cart.length
+   
     // Store in localStorage
     localStorage.setItem('cart', JSON.stringify(cart))
-    localStorage.setItem('totalPrice',totalPrice.toFixed(2))
+    totalItemsPrice.textContent = totalPrice.toFixed(2)// Updates total price in 2 decimal places
 
     let image = document.getElementById('empty-img')
 
@@ -138,7 +139,7 @@ function updatedCart(){
       else {
         image.style.display = "none";
     }    
-
+     
 }
 console.log(itemsList)
 console.log(totalItemsPrice)
