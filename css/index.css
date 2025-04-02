@@ -48,6 +48,7 @@ box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
 }
 
 .cart-div ul li {
+  margin-top: -5px;
   padding: 5px 0;
   border-bottom: 1px solid #ddd;
 }
@@ -64,6 +65,7 @@ box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
 h6{
   margin-top: -25px;
   text-align: center;
+  font-size: 1.5rem;
   }
 
 
@@ -116,8 +118,8 @@ h6{
   border-radius: 5px; 
   position: relative;
   bottom: 0px;
-  right: -54px;
-  gap: 5px;
+  right: -50px;
+  gap: 3px;
 }
 
 /* Cart icon*/

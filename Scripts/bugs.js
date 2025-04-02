@@ -45,12 +45,12 @@ totalItemsPrice.textContent = storedTotal // Restore/Retrieve stored total
 
 
 // Add to Cart 
-function addToCart (item){
-    let existingItem = carts.find(cartItem => cartItem.id ===item.id)// checks if there's an existing item
-    if (existingItem){
-        existingItem.quantity += 1 // Increase if item already exist
+function addToCart (item){carts.push({...item, quantity:1})
+    //let existingItem = carts.find(cartItem => cartItem.id ===item.id)// checks if there's an existing item
+    //if (existingItem){
+       // existingItem.quantity += 1 // Increase if item already exist
 
-    } else{carts.push({...item, quantity:1})}// Add new items to cart
+    //} else{carts.push({...item, quantity:1})}// Add new items to cart
 
     // Save updated cart to localStorage
     localStorage.setItem('cart', JSON.stringify(carts))
@@ -126,7 +126,7 @@ function updatedCart(){
       else {
         image.style.display = "none";
     }    
-
+    
 }
 console.log(itemsList)
 console.log(totalItemsPrice)

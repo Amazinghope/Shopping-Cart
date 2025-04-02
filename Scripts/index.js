@@ -36,23 +36,27 @@ let itemsList = document.getElementById("cart-items");
 let clearButton = document.getElementById("clear-btn");
 let totalItemsPrice = document.getElementById("total-price");
 let dessertContainer = document.getElementById("container");
-let quantity = document.getElementById("qty");
 
 //let itemsAdded = []
 //let counterValue = 1
 //quantity.textContent = counterValue
 
 // Attach eventListner
-document.querySelectorAll(".btns").forEach((button) => {
-  button.addEventListener("click", (event) => {
-    let index = event.target.getAttribute("data-index");
+document.querySelectorAll(".btns").forEach((button, index) => {
+  button.addEventListener("click", () => {
+    //let index = event.target.getAttribute("data-index");
     addToCart(allCarts[index]);
-    console.log(allCarts);
   });
+  //console.log(allCarts);
+  //console.log(document.querySelectorAll(".btns"))
 });
 
 // Add to Cart Function
 function addToCart(item) {
+  if (!item) {
+    console.error("invalid item! item does not exist");
+    return;
+  }
   let existingItem = cart.find((cartItem) => cartItem.id === item.id); // checks if there's an existing item
   if (existingItem) {
     existingItem.quantity++; // Increase if item already exist
@@ -63,26 +67,27 @@ function addToCart(item) {
   localStorage.setItem("cart", JSON.stringify(cart));
 
   updatedCart();
-  // Attach Add to cart function to button
-  // document.querySelectorAll('.btns').forEach((button, index)=>{
-  //     button.addEventListener('click', () =>{
-  //         addToCart(allCarts[index])
-  //     })
-  // })
+  cartCount()
 }
+
+// Cart Count 
+function cartCount(){
+    let totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+    document.getElementById('cart-totalcount').textContent = totalItems
+}
+
 
 // Remove from cart
 function removeBtn() {
-document.querySelectorAll('.remove-btn').forEach(button  => {
+  document.querySelectorAll(".remove-btn").forEach((button) => {
     button.addEventListener("click", (event) => {
-    let index = event.target.getAttribute("data-index");
-    cart.splice(index, 1);
-    localStorage.setItem('cart', JSON.stringify(cart))
-    
-    updatedCart();
-          });
-    })
-  
+      let index = event.target.getAttribute("data-index");
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+
+      updatedCart();
+    });
+  });
 }
 console.log(document.querySelectorAll("remove-btn"));
 
@@ -102,32 +107,34 @@ function updatedCart() {
 
   cart.forEach((item, index) => {
     let showItemsListed = document.createElement("li");
-    showItemsListed.classList.add(".remove-cart")
-    showItemsListed.innerHTML = `${item.name} - $${(
-    item.price * item.quantity
-    ).toFixed(2)}
+    showItemsListed.classList.add(".remove-cart");
+    showItemsListed.innerHTML = `
+    ${item.name} - $${(item.price * item.quantity).toFixed(2)}
     <button class = "remove-btn" data-index ="${index}"> Remove </button>`;
-  
-    totalPrice += item.price * item.quantity;
+
     itemsList.appendChild(showItemsListed);
+    totalPrice += item.price * item.quantity;
+
     console.log(showItemsListed);
-        
   });
 
-  //totalCartCount.textContent = cart.length
+  totalCartCount.textContent = cart.length;
+
+  localStorage.setItem("totalPrice", totalPrice.toFixed(2));
+  totalItemsPrice.textContent = totalPrice.toFixed(2); // Updates total price in 2 decimal places
 
   // Store in localStorage
   localStorage.setItem("cart", JSON.stringify(cart));
-  totalItemsPrice.textContent = totalPrice.toFixed(2); // Updates total price in 2 decimal places
+  localStorage.setItem("totalPrice", totalPrice.toFixed(2));
 
   let image = document.getElementById("empty-img");
 
-  if (totalCartCount === 0) {
+  if (totalCartCount === 0 && itemsList === 0) {
     image.style.display = "block";
   } else {
     image.style.display = "none";
   }
-  removeBtn()
+  removeBtn();
 }
 console.log(itemsList);
 console.log(totalItemsPrice);
