@@ -101,6 +101,9 @@ h6{
 
     }
 
+    .remove-cart{
+  list-style: none;
+    }
 
 .remove-btn{
   width: 20%;
@@ -198,6 +201,9 @@ p{
 
   .remove-btn{
     width: 35%;
+    display: block !important;
+    visibility: visible;
+    z-index: 10;
   }
   .line1{
     flex-flow: column wrap;
