@@ -196,6 +196,9 @@ p{
     width:60% ;
   }
 
+  .remove-btn{
+    width: 35%;
+  }
   .line1{
     flex-flow: column wrap;
     
