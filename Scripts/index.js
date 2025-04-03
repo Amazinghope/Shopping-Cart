@@ -77,6 +77,8 @@ function cartCount(){
 }
 
 
+
+
 // Remove from cart
 function removeBtn() {
   document.querySelectorAll(".remove-btn").forEach((button) => {
