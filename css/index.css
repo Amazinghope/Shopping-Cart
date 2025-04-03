@@ -18,7 +18,8 @@ text-align: center;
 box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
 
 }
-h1{
+h1{margin: 0 auto;
+  text-align: center;
   font-size: 2.5rem;
 }
 
@@ -283,7 +284,7 @@ p{
   h1{
     width: 66%;
    font-size: 1rem;
-   text-align-last: center;
+      
   }
 
   p{font-size: 0.9rem;}
