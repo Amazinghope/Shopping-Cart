@@ -44,7 +44,7 @@ let dessertContainer = document.getElementById("container");
 // Attach eventListner
 document.querySelectorAll(".btns").forEach((button, index) => {
   button.addEventListener("click", () => {
-    //let index = event.target.getAttribute("data-index");
+    let index = event.target.getAttribute("data-index");
     addToCart(allCarts[index]);
   });
   //console.log(allCarts);
@@ -53,10 +53,7 @@ document.querySelectorAll(".btns").forEach((button, index) => {
 
 // Add to Cart Function
 function addToCart(item) {
-  if (!item) {
-    console.error("invalid item! item does not exist");
-    return;
-  }
+  
   let existingItem = cart.find((cartItem) => cartItem.id === item.id); // checks if there's an existing item
   if (existingItem) {
     existingItem.quantity++; // Increase if item already exist
@@ -68,6 +65,7 @@ function addToCart(item) {
 
   updatedCart();
   cartCount()
+  
 }
 
 // Cart Count 
@@ -76,7 +74,13 @@ function cartCount(){
     document.getElementById('cart-totalcount').textContent = totalItems
 }
 
-
+// function reduceQty(){
+//   let cartquantity = document.querySelectorAll('reduce-btn')
+//   console.log(cartquantity)
+//   let count = 0
+//    count -= 1
+//  cartquantity.textContent = count
+// }
 
 
 // Remove from cart
@@ -91,7 +95,39 @@ function removeBtn() {
     });
   });
 }
-console.log(document.querySelectorAll("remove-btn"));
+//console.log(document.querySelectorAll("remove-btn"));
+
+// Reduce Quantity Button
+function reduceQty(index){ 
+if (cart[index].quantity > 1){
+  cart[index].quantity--; // Decrease qty by 1
+}
+else{cart.splice(index,1) // Removes qty item if qty is 1
+}
+updatedCart();
+}
+
+// //Add Event Listner to reduceQty()
+document.addEventListener('click', function (event){
+  if (event.target.classList.contains('reduce-btn')){
+    let item = event.target.getAttribute('data-index')
+    reduceQty(item)
+  }
+})
+
+//Buy Button 
+function buyItem(){
+  if(cart.length === 0){
+    alert('Your cart is empty')  
+    return
+  }else{ alert('Your order is confirmed')
+    cart = []// clears the cart
+  }
+  updatedCart()
+}
+
+// Event Listner For Buy Button
+document.getElementById('buy-btn').addEventListener('click', buyItem)
 
 //Clear Cart
 clearButton.addEventListener("click", () => {
@@ -102,7 +138,7 @@ clearButton.addEventListener("click", () => {
 });
 
 // Updated cart
-function updatedCart() {
+  function updatedCart() {
   itemsList.innerHTML = "";
   totalPrice = 0;
   totalCartCount.textContent = cart.length;
@@ -111,19 +147,26 @@ function updatedCart() {
     let showItemsListed = document.createElement("li");
     showItemsListed.classList.add(".remove-cart");
     showItemsListed.innerHTML = `
+    <button class = "remove-btn" data-index ="${index}"> Remove </button>
+    <button class = "reduce-btn" data-index = "${index}"> - </button>
     ${item.name} - $${(item.price * item.quantity).toFixed(2)}
-    <button class = "remove-btn" data-index ="${index}"> Remove </button>`;
+    `;
 
     itemsList.appendChild(showItemsListed);
     totalPrice += item.price * item.quantity;
 
     console.log(showItemsListed);
+    
   });
 
   totalCartCount.textContent = cart.length;
 
   localStorage.setItem("totalPrice", totalPrice.toFixed(2));
   totalItemsPrice.textContent = totalPrice.toFixed(2); // Updates total price in 2 decimal places
+
+  
+  // let reduceQuantity = cart.reduce((sum, item)=> sum + item.quantity, 0);
+  // document.querySelectorAll('reduce-btn').textContent = reduceQuantity
 
   // Store in localStorage
   localStorage.setItem("cart", JSON.stringify(cart));
@@ -137,7 +180,8 @@ function updatedCart() {
     image.style.display = "none";
   }
   removeBtn();
+  //reduceQty()
 }
-console.log(itemsList);
-console.log(totalItemsPrice);
-console.log("Cart is updating. Current cart", cart);
+//console.log(itemsList);
+//console.log(totalItemsPrice);
+//console.log("Cart is updating. Current cart", cart);
