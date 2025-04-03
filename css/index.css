@@ -95,7 +95,7 @@ h6{
   }
 
   #clear-btn {
-    background: #ff6b6b;
+  background: #ff6b6b;
   color: white;
   border: none;
   padding: 8px 15px;
@@ -105,7 +105,7 @@ h6{
 
     }
 
-    .remove-cart{
+  .remove-cart{
   list-style: none;
     }
 
@@ -146,6 +146,7 @@ p{
   position: relative;
   bottom: 35px;
   }
+  
 .pa{color: rgb(117, 115, 115);}
 .pc{color: red;}
 
@@ -201,10 +202,11 @@ p{
     margin: 0 auto;
     justify-content: center;
     position: absolute;
+    height: auto;
   }
 
   .cart-div{
-    
+    margin: 0 auto;
     width: 100%;}
 
   .container{
@@ -212,7 +214,7 @@ p{
   }
 
   .remove-btn{
-    width: 35%;
+    width: 20%;
     display: block !important;
     visibility: visible;
     z-index: 10;
