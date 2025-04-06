@@ -117,12 +117,20 @@ document.addEventListener('click', function (event){
 
 //Buy Button 
 function buyItem(){
+  let emptyCart = document.getElementById('cart-empty')
+  let confirm = document.getElementById('confirm-msg')
   if(cart.length === 0){
-    alert('Your cart is empty')  
+  emptyCart.style.display = 'block'  
     return
-  }else{ alert('Your order is confirmed')
+  } else{ emptyCart.style.display = 'none'
+    if(cart.length>0) {
+      confirm.style.display = 'block'
+     }else{
+      confirm.style.display = 'none'
+     }
     cart = []// clears the cart
   }
+  
   updatedCart()
 }
 

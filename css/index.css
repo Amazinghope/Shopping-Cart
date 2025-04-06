@@ -1,7 +1,8 @@
 body{
   background-color: whitesmoke;
   font-family: Arial, Helvetica, sans-serif;
-    
+  margin-left: auto;
+  margin-right: auto;    
 }
 
 
@@ -10,9 +11,9 @@ body{
 .header{
 border-radius: 5px;
 margin: 0 auto;
-width: 94%;
+width: 98%;
 font-style: italic;
-padding:20px;
+padding: 20px 0;
 background-image: linear-gradient(65deg, #FFFFF0, #d7cdd7, #FFFFF0);
 text-align: center;
 box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
@@ -20,7 +21,7 @@ box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
 }
 h1{margin: 0 auto;
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
 
 h3{
@@ -119,7 +120,6 @@ h6{
   border-color: gray;
   display: block;
   margin: 0 auto;
-  gap: 5px;
   position: relative;
   top: -23px;
 
@@ -170,6 +170,30 @@ h6{
     background-color: antiquewhite;
     }
 
+
+    #cart-empty {
+      width: 80%;
+      background-color: red;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      border-radius: 8px;
+      margin: 10px auto;
+      display: none;
+    }
+
+
+    #confirm-msg {
+      width: 80%;
+      background-color: green;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      border-radius: 8px;
+      margin: 10px auto;
+      display: none;
+    }
+  
   .remove-cart{
   list-style: none;
     }
@@ -277,8 +301,16 @@ p{
 }
 
 @media(max-width:800px){
+  body{
+    width: 90%;
+  }
   .left-right{
     flex-flow: column wrap;
+  }
+
+  .header{
+    width: 80%;
+    padding: 5px 0;
   }
 
   h1{
@@ -287,35 +319,48 @@ p{
       
   }
 
+  h3{
+    font-size: 0.8rem;
+  }
+
   p{font-size: 0.9rem;}
 
   .cart-container{
     width: 70%;
     margin: 0 auto;
-    position: absolute;
-    left: 6px;
+    position: relative;
+    
     height: auto;
   }
 
-  .cart-div{
-    
+  .cart-container img{
     margin: 0 auto;
-    width: 100%;}
+    justify-items: center;
+    /* margin-left: 46px; */
+  }
+  
+
+  .cart-div{
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+    }
 
   .container{
     width:60% ;
   }
 .reduce-btn{
-  width: 20%;
-    display: block !important;
-    visibility: visible;
-    z-index: 10;
+  width: 23%;
+  
 }
   .remove-btn{
-    width: 20%;
-    display: block !important;
-    visibility: visible;
-    z-index: 10;
+    width: 23%;
+      
+  }
+
+  .btns{
+    position: relative;
+    top: -26px;
   }
   .line1{
     flex-flow: column wrap;
@@ -329,5 +374,7 @@ p{
   .line3{
     flex-flow: column wrap;
   }
+
+
 }
 
