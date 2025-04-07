@@ -308,13 +308,14 @@ p{
     flex-flow: column wrap;
   }
 
+  
   .header{
     width: 80%;
     padding: 5px 0;
   }
 
   h1{
-    width: 66%;
+    width: 100%;
    font-size: 1rem;
       
   }
@@ -349,6 +350,10 @@ p{
   .container{
     width:60% ;
   }
+
+  #buy-btn{
+    width: 23%;
+  }
 .reduce-btn{
   width: 23%;
   
@@ -378,3 +383,29 @@ p{
 
 }
 
+@media(max-width:382px){
+  h1{
+    width: 100%;
+   font-size: 0.7rem;
+      
+  }
+
+  h3{
+    font-size: 0.5rem;
+  }
+  
+  .btns{
+    position: relative;
+    top: -30px;
+  }
+
+  .reduce-btn{
+    width: 10%;
+    
+  }
+    .remove-btn{
+      width: 30%;
+        
+    }
+  
+}
